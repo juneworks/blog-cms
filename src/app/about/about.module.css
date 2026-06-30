@@ -1,0 +1,125 @@
+.aboutArticle {
+  width: 100%;
+  text-align: left;
+  box-sizing: border-box;
+}
+
+/* 대제목 컨테이너 */
+.sectionHeader {
+  margin-top: 50px;
+  margin-bottom: 25px;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 12px;
+}
+
+.sectionHeader:first-child {
+  margin-top: 0; /* 헤더 구분선과의 100px 간격을 정확히 맞추기 위해 상단 마진 제거 */
+}
+
+/* 메인 대제목 */
+.sectionTitle {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #000000;
+  margin: 0;
+  letter-spacing: -0.01em;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* 첫 네 단어 악센트 (JUNE, WORKS 등) */
+.titleAccent {
+  color: #000000;
+  font-weight: 900;
+}
+
+.titleRest {
+  color: #a24a41; /* WORKS 옆의 오렌지 레드 톤 동기화 */
+}
+
+/* 제목 옆/아래 설명구 (이미지 속 붉은 서브 타이틀 톤) */
+.sectionDesc {
+  font-size: 0.85rem;
+  color: #a24a41; /* 어두운 와인 레드 톤 적용 */
+  margin-top: 6px;
+  margin-bottom: 0;
+  font-family: var(--font-serif);
+  font-weight: 500;
+}
+
+/* 본문 단락 */
+.paragraph {
+  font-size: 0.95rem;
+  line-height: 1.85;
+  color: #000000; /* 검정색 통일 */
+  margin-bottom: 24px;
+  font-family: var(--font-serif);
+  text-align: justify; /* 양끝 정렬하여 정갈한 활자 형태 연출 */
+}
+
+/* 마지막 문단은 아래 마진을 제거하여 정확히 100px의 푸터 간격을 띰 */
+.paragraph:last-child {
+  margin-bottom: 0;
+}
+
+/* 소그룹 리스트 컨테이너 (― motto 등) */
+.listGroup {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  padding-left: 5px;
+}
+
+.listGroupTitle {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: rgba(0, 0, 0, 0.9);
+  margin-bottom: 12px;
+  font-family: var(--font-serif);
+}
+
+.listItems {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.listItem {
+  font-size: 0.88rem;
+  line-height: 1.75;
+  color: rgba(0, 0, 0, 0.82); /* 50% 진하게 변경 */
+  margin-bottom: 6px;
+  font-family: var(--font-serif);
+  position: relative;
+  padding-left: 12px;
+}
+
+/* 리스트 항목 앞의 은은한 가로 대시 표시 */
+.listItem::before {
+  content: "·";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: rgba(0, 0, 0, 0.4);
+}
+
+/* 네비게이션 소개 탭 활성 컬러 */
+.activeMenu {
+  color: var(--point-green) !important;
+  font-weight: 700 !important;
+}
+
+/* 모바일 768px 이하 패딩 보정 */
+@media (max-width: 768px) {
+  .sectionHeader {
+    margin-top: 35px;
+    margin-bottom: 20px;
+  }
+  
+  .sectionTitle {
+    font-size: 1.35rem;
+  }
+  
+  .paragraph {
+    font-size: 0.92rem;
+    line-height: 1.75;
+  }
+}

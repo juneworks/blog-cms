@@ -1,0 +1,367 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  position: relative;
+  justify-content: space-between;
+  padding-top: 60px; /* 고정 헤더 높이(60px)만큼 강제 여백 확보 */
+  padding-bottom: 40px; /* 고정 푸터 높이(40px)만큼 강제 여백 확보 */
+  box-sizing: border-box;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 60px; /* 높이 80px에서 3/4 크기인 60px로 축소 */
+  flex-shrink: 0; /* 어떠한 화면에서도 높이 고정 */
+  padding: 0 4rem; /* 좌우 패딩 설정 */
+  border-bottom: 1px solid var(--border-color); /* 가로 100% 구분선 */
+  box-sizing: border-box;
+  position: fixed; /* 완전히 고정시키기 위해 sticky에서 fixed로 변경 */
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: var(--background); /* 스크롤 시 뒤 콘텐츠가 겹치지 않게 배경색 지정 */
+}
+
+
+
+.authorName {
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 5px; /* 김과 준 사이의 간격 5px 추가 */
+  margin-right: -5px; /* 자간 설정으로 생기는 우측 공백 상쇄 */
+  color: var(--foreground);
+}
+
+.headerNav {
+  display: flex;
+  gap: 54px; /* 기존 24px(1.5rem)에서 30px 더 늘려 간격 조정 */
+  margin-left: auto; /* 우측 끝 정렬 */
+}
+
+.headerNavLink {
+  font-size: 0.9rem;
+  color: rgba(0, 0, 0, 0.9); /* 이전(0.6) 대비 50% 더 진하고 선명한 검은색 기반 톤 지정 */
+  font-weight: 500;
+  position: relative;
+  display: inline-block;
+  padding: 0.1rem 0.2rem; /* 가로선 폭에 맞추어 조밀하게 변경 */
+  transition: color 0.2s ease;
+}
+
+/* 글자 가운데를 관통하는 절반 두께(2.5px)의 초록색 가로선 */
+.headerNavLink::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 0%;
+  height: 2.5px; /* 글 제목 취소선(5px)의 절반 두께 */
+  background-color: var(--point-green);
+  transform: translateY(-50%);
+  transition: width 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  pointer-events: none;
+}
+
+.headerNavLink:hover {
+  color: var(--point-green); /* 호버 시 글자 색상도 숲색으로 변경 */
+}
+
+.headerNavLink:hover::after {
+  width: 100%;
+}
+
+
+/* 글 내용 영역 */
+.main {
+  flex-grow: 1;
+  max-width: 680px; /* 실제 영역 가로 680px로 통일 지정 */
+  width: 100%;
+  margin: 0 auto; /* 상단 마진은 스티키 헤더가 있으므로 0으로 하고 패딩 탑으로 보정 */
+  padding-top: 40px; /* 고정 제목 영역과의 간격 확보 */
+  padding-bottom: 20px; /* 하단 네비게이션 간격 20px 확보 */
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+/* 동적 스티키 제목 영역 */
+.postHeaderArea {
+  position: sticky;
+  top: 60px; /* 사이트 메인 헤더(60px) 바로 아래에 밀착 */
+  width: 100%;
+  height: 150px; /* 처음 들어왔을 때 높이 150px */
+  background-color: var(--background);
+  z-index: 990;
+  transition: height 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  box-sizing: border-box;
+  flex-shrink: 0;
+  border-bottom: none; /* 구분선은 container 내부에서 absolute 처리함 */
+}
+
+.postHeaderContainer {
+  max-width: 680px; /* 본문 실제 가로 폭과 완벽 일치 */
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* 제목 및 메타가 150px 영역의 하단부에 배치됨 */
+  position: relative;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .postHeaderContainer {
+    padding: 0 1.5rem; /* 모바일 좌우 여백 */
+  }
+}
+
+.postTitleRow {
+  display: flex;
+  align-items: flex-end;
+  width: 100%;
+}
+
+.postTitle {
+  font-size: 14pt; /* 글 타이틀 14pt 지정 */
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--foreground);
+  margin: 0;
+  text-align: left;
+  transition: font-size 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.postMetaRow {
+  display: flex;
+  justify-content: space-between; /* 부제는 좌측, 날짜는 우측 양끝 배치 */
+  align-items: flex-end;
+  width: 100%;
+  margin-top: 5px; /* 타이틀과 부제/날짜 간의 간격 5px */
+  margin-bottom: 5px;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.postSubtitle {
+  font-size: 9px; /* 부제 9px 지정 */
+  color: rgba(0, 0, 0, 0.82); /* 이전(0.55) 대비 50% 이상 더 진한 검은색 기반 톤 지정 */
+  margin: 0;
+  text-align: left;
+  font-family: var(--font-serif);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 75%;
+}
+
+.postDate {
+  font-size: 9px; /* 날짜 9px 지정 */
+  color: rgba(0, 0, 0, 0.82); /* 이전(0.55) 대비 50% 이상 더 진한 검은색 기반 톤 지정 */
+  text-align: right;
+  font-family: var(--font-serif);
+  white-space: nowrap;
+}
+
+/* 제목 영역 구분선 및 스크롤 진행선 컨테이너 */
+.headerDividerContainer {
+  position: relative;
+  width: 100%;
+  height: 1px;
+  margin-top: 5px; /* 제목 영역 하단에 5px 간격 띄움 */
+  margin-bottom: 0;
+}
+
+.headerDivider {
+  width: 100%;
+  height: 1px;
+  background-color: var(--border-color); /* 제목 영역 구분선 */
+}
+
+/* 스크롤 진행 상황을 보여주는 인디케이터 굵은 선 */
+.scrollIndicator {
+  position: absolute;
+  left: 0;
+  top: -1px; /* 구분선 바로 위에 겹치도록 설정 */
+  height: 3px; /* 굵기: 호버 효과 선(5px)의 60% = 3px */
+  background-color: var(--point-green); /* 선 색상: 메인 타이틀 호버색 */
+  transition: width 0.1s ease;
+  z-index: 10;
+}
+
+/* 스크롤 다운 시 동적 축소 스타일 (.scrolled 활성화) */
+.postHeaderArea.scrolled {
+  height: 60px; /* 높이가 사이트 헤더와 동일한 60px로 축소 */
+}
+
+.postHeaderArea.scrolled .postTitle {
+  font-size: 10pt; /* 글 제목 10pt로 축소 */
+}
+
+.postHeaderArea.scrolled .postMetaRow {
+  opacity: 0; /* 부제와 날짜는 보이지 않도록 페이드아웃 */
+  pointer-events: none;
+  transform: translateY(-5px);
+}
+
+/* 글 아티클 */
+.postArticle {
+  width: 100%;
+  text-align: left;
+}
+
+.postContent {
+  font-size: 1.02rem;
+  line-height: 1.95;
+  color: #000000; /* 글 영역 본문 텍스트 색상 검정색 지정 */
+  white-space: pre-wrap; /* 본문 줄바꿈 보존 */
+  text-align: left; /* 왼쪽 정렬 */
+}
+
+/* 글 하단 네비게이션 및 인터랙션 섹션 */
+.navSectionContainer {
+  max-width: 680px;
+  width: 100%;
+  margin: 20px auto 0 auto; /* 본문 아래 20px 정도 간격 띄움 */
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .navSectionContainer {
+    padding: 0 1.5rem;
+  }
+}
+
+.bottomDivider {
+  width: 100%;
+  height: 1px;
+  background-color: var(--border-color); /* 하단 구분선 */
+}
+
+.postNavigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 40px; /* 사이트 푸터와 동일한 40px 높이의 간격 영역 */
+  box-sizing: border-box;
+}
+
+.navLeft, .navRight {
+  width: 25%;
+}
+
+.navLeft {
+  text-align: left;
+}
+
+.navRight {
+  text-align: right;
+}
+
+.navLink {
+  font-size: 9px; /* 크기 9px 지정 */
+  color: rgba(0, 0, 0, 0.9); /* 이전(0.6) 대비 50% 더 진하고 선명한 검은색 기반 톤 지정 */
+  font-family: var(--font-serif);
+  transition: color 0.2s ease;
+}
+
+.navLink:hover {
+  color: var(--point-green);
+  font-weight: 700;
+}
+
+.navDisabled {
+  font-size: 9px;
+  color: rgba(44, 44, 45, 0.2);
+  font-family: var(--font-serif);
+  cursor: not-allowed;
+}
+
+.navCenter {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.interactionBtn {
+  background: none;
+  border: none;
+  font-size: 11px;
+  color: rgba(0, 0, 0, 0.9); /* 이전(0.6) 대비 50% 더 진하고 선명한 검은색 기반 톤 지정 */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  transition: all 0.2s ease;
+  font-family: var(--font-serif);
+}
+
+.interactionBtn:hover {
+  color: var(--point-green);
+  transform: scale(1.1);
+}
+
+.interactionBtn.liked {
+  color: #e25c5c; /* 활성화 하트: 다크레드 톤 */
+  font-weight: 700;
+}
+
+/* 푸터 영역 */
+.footer {
+  display: flex;
+  justify-content: center; /* 한가운데 정렬 */
+  align-items: center;
+  width: 100%;
+  height: 40px; /* 높이 40px 지정 */
+  flex-shrink: 0; /* 어떠한 화면에서도 높이 고정 */
+  margin-top: auto;
+  padding: 0 4rem; /* 상하 패딩 0, 좌우 패딩 복원 */
+  border-top: 1px solid var(--border-color); /* 상단 구분선 추가 */
+  box-sizing: border-box;
+  position: fixed; /* 완전히 고정시키기 위해 sticky에서 fixed로 변경 */
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: var(--background); /* 스크롤 시 뒤 콘텐츠가 겹치지 않게 배경색 지정 */
+}
+
+.copyright {
+  font-size: 0.8rem;
+  color: rgba(0, 0, 0, 0.75); /* 이전(0.45) 대비 50% 이상 더 진한 검은색 기반 톤 지정 */
+  letter-spacing: -0.01em;
+  font-weight: 400;
+}
+
+
+/* 반응형 모바일 스타일 */
+@media (max-width: 768px) {
+  .container {
+    padding: 0;
+  }
+
+  .header {
+    padding: 0 1.5rem;
+  }
+
+  .main {
+    padding: 20px 1.5rem 20px 1.5rem;
+  }
+
+  .footer {
+    display: flex;
+    justify-content: center; /* 모바일에서도 한가운데 정렬 */
+    align-items: center;
+    width: 100%;
+    height: 40px; /* 높이 40px 유지 */
+    padding: 0 1.5rem; /* 모바일 좌우 패딩 */
+  }
+}
+

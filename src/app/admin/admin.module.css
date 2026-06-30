@@ -1,0 +1,469 @@
+/* 관리자 페이지 공통 레이아웃 */
+.adminContainer {
+  max-width: 1000px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+  font-family: var(--font-serif);
+}
+
+.adminHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 1.5rem;
+}
+
+.adminTitle {
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 1rem;
+}
+
+.btn {
+  padding: 0.6rem 1.2rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  color: #333;
+}
+
+.btn:hover {
+  background-color: #f7f7f7;
+  border-color: #bbb;
+}
+
+.btnPrimary {
+  background-color: var(--point-green);
+  color: #fff;
+  border-color: var(--point-green);
+}
+
+.btnPrimary:hover {
+  background-color: #2b3d32;
+  border-color: #2b3d32;
+}
+
+.btnDanger {
+  color: #d32f2f;
+  border-color: rgba(211, 47, 47, 0.2);
+}
+
+.btnDanger:hover {
+  background-color: rgba(211, 47, 47, 0.04);
+  border-color: #d32f2f;
+}
+
+/* 관리자 글 목록 테이블 */
+.postTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.postTable th,
+.postTable td {
+  padding: 1.2rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.postTable th {
+  font-weight: 700;
+  color: rgba(44, 44, 45, 0.6);
+  font-size: 0.9rem;
+}
+
+.postTable tr:hover td {
+  background-color: rgba(44, 44, 45, 0.01);
+}
+
+.tableTitle {
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+
+.tableSubtitle {
+  display: block;
+  font-size: 0.85rem;
+  color: rgba(44, 44, 45, 0.5);
+  margin-top: 0.2rem;
+}
+
+.tableDate {
+  font-size: 0.85rem;
+  color: rgba(44, 44, 45, 0.5);
+}
+
+.tableActions {
+  display: flex;
+  gap: 0.8rem;
+}
+
+/* --- 로그인 화면 --- */
+.loginWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+.loginCard {
+  background-color: #ffffff;
+  border: 1px solid var(--border-color);
+  padding: 3rem 2.5rem;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+  border-radius: 4px;
+}
+
+.loginTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.loginDesc {
+  font-size: 0.85rem;
+  color: rgba(44, 44, 45, 0.5);
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.inputGroup {
+  margin-bottom: 1.5rem;
+}
+
+.inputLabel {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: rgba(44, 44, 45, 0.8);
+}
+
+.inputField {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 1px solid rgba(44, 44, 45, 0.15);
+  border-radius: 4px;
+  font-size: 0.95rem;
+  background-color: #fafaf9;
+  font-family: inherit;
+  transition: border-color 0.2s ease;
+}
+
+.inputField:focus {
+  outline: none;
+  border-color: var(--point-green);
+}
+
+.loginBtn {
+  width: 100%;
+  padding: 0.9rem;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 1rem;
+  margin-top: 1rem;
+}
+
+.errorMessage {
+  background-color: rgba(211, 47, 47, 0.05);
+  color: #d32f2f;
+  padding: 0.8rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  border: 1px solid rgba(211, 47, 47, 0.1);
+}
+
+
+/* --- 에디터 스타일 --- */
+.editorContainer {
+  background-color: #ffffff; /* 캡처본은 배경이 완전한 흰색 */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.editorNavbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+.navbarLeft {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.navLink {
+  font-size: 0.85rem;
+  color: rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.navLink:hover {
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.saveBtn {
+  padding: 0.45rem 1.5rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  background-color: #ffffff;
+  color: rgba(0, 0, 0, 0.7);
+  transition: all 0.2s ease;
+}
+
+.saveBtn:hover {
+  border-color: rgba(0, 0, 0, 0.8);
+  color: rgba(0, 0, 0, 1);
+}
+
+.editorWorkspace {
+  display: flex;
+  flex-grow: 1;
+  max-width: 900px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+  gap: 3rem;
+  position: relative;
+}
+
+.writeArea {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 제목 텍스트 박스 */
+.titleInput {
+  font-size: 2.2rem;
+  font-weight: 500;
+  border: none;
+  outline: none;
+  width: 100%;
+  color: rgba(0, 0, 0, 0.8);
+  font-family: var(--font-serif);
+  padding: 0.5rem 0;
+  margin-top: 1rem;
+}
+
+.titleInput::placeholder {
+  color: rgba(0, 0, 0, 0.15);
+}
+
+/* 소제목 텍스트 박스 */
+.subtitleInput {
+  font-size: 1.1rem;
+  border: none;
+  outline: none;
+  width: 100%;
+  color: rgba(0, 0, 0, 0.5);
+  font-family: var(--font-serif);
+  padding: 0.5rem 0;
+  margin-bottom: 2.5rem;
+}
+
+.subtitleInput::placeholder {
+  color: rgba(0, 0, 0, 0.20);
+}
+
+.divider {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+  margin-bottom: 2rem;
+}
+
+/* 본문 텍스트 박스 */
+.contentTextarea {
+  flex-grow: 1;
+  border: none;
+  outline: none;
+  resize: none;
+  width: 100%;
+  min-height: 450px;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: rgba(0, 0, 0, 0.7);
+  font-family: var(--font-serif);
+}
+
+.contentTextarea::placeholder {
+  color: rgba(0, 0, 0, 0.2);
+}
+
+/* 세로 툴바 영역 */
+.toolbarSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: sticky;
+  top: 3rem;
+  height: fit-content;
+  gap: 4rem; /* 제목용 툴바와 본문용 툴바 사이의 넉넉한 간격 */
+  padding-top: 1rem;
+}
+
+.toolbarGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  background-color: #ffffff;
+}
+
+.toolbarIcon {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  color: rgba(0, 0, 0, 0.35);
+  transition: all 0.2s ease;
+  background: #ffffff;
+}
+
+.toolbarIcon:hover {
+  background-color: #f7f7f7;
+  color: rgba(0, 0, 0, 0.8);
+  border-color: rgba(0, 0, 0, 0.15);
+}
+
+/* 모바일 미리보기 모달 */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(2px);
+}
+
+.modalContent {
+  background-color: var(--background); /* 웜 베이지 배경 반영 */
+  width: 375px; /* 모바일 폭 */
+  height: 700px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  border: 8px solid #222; /* 폰 모양 베젤 효과 */
+  position: relative;
+}
+
+.modalHeader {
+  background-color: #222;
+  color: #fff;
+  padding: 0.4rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+}
+
+.modalBody {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.modalPostTitle {
+  font-size: 1.6rem;
+  font-weight: 500;
+  margin-top: 1rem;
+  color: var(--foreground);
+}
+
+.modalPostSubtitle {
+  font-size: 0.95rem;
+  color: rgba(44, 44, 45, 0.6);
+  margin-top: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.modalPostContent {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: var(--foreground);
+  white-space: pre-wrap;
+}
+
+.closeModalBtn {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+/* 반응형 조정 */
+@media (max-width: 768px) {
+  .editorWorkspace {
+    flex-direction: column;
+    padding: 1.5rem 1rem;
+    gap: 1.5rem;
+  }
+
+  .titleInput {
+    font-size: 1.8rem;
+  }
+
+  .toolbarSection {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    flex-direction: row;
+    justify-content: center;
+    background-color: #ffffff;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+    padding: 0.5rem;
+    gap: 1rem;
+    z-index: 100;
+  }
+
+  .toolbarGroup {
+    flex-direction: row;
+    gap: 0.5rem;
+  }
+
+  .toolbarIcon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .contentTextarea {
+    min-height: 300px;
+    margin-bottom: 4rem; /* 하단 툴바 공간 */
+  }
+}

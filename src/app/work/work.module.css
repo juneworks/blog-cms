@@ -1,0 +1,102 @@
+/* 2열 반응형 그리드 */
+.workGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px; /* 기존보다 넉넉하고 시원한 여백 */
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.workCard {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+/* 1:1 비율의 정사각형 썸네일 박스 */
+.thumbnailBox {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+              box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+.workCard:hover .thumbnailBox {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 12px 28px rgba(46, 99, 63, 0.12); /* 포인트 초록을 머금은 감각적인 그림자 */
+}
+
+/* 썸네일 박스 중앙에 들어가는 은은한 화이트 심볼 기호 */
+.thumbnailSymbol {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.72);
+  letter-spacing: 2px;
+  pointer-events: none;
+  user-select: none;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.workCard:hover .thumbnailSymbol {
+  color: rgba(255, 255, 255, 0.95);
+  transform: scale(1.05);
+}
+
+/* 작업 제목 (이전 회색 대비 50% 수준 더 어둡고 뚜렷하게 변경) */
+.workTitle {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: rgba(0, 0, 0, 0.9); /* 50% 진하게 변경 */
+  margin-top: 12px;
+  margin-bottom: 4px;
+  transition: color 0.2s ease;
+  font-family: var(--font-serif);
+  text-align: left;
+}
+
+.workCard:hover .workTitle {
+  color: var(--point-green); /* 호버 시 포인트 숲색 */
+}
+
+/* 작업 부제/설명 */
+.workSubtitle {
+  font-size: 0.8rem;
+  color: rgba(0, 0, 0, 0.72); /* 50% 진하게 변경 */
+  margin: 0;
+  text-align: left;
+  line-height: 1.4;
+  font-family: var(--font-serif);
+}
+
+/* 헤더 메뉴 '작업' 탭의 활성 마킹 */
+.activeMenu {
+  color: var(--point-green) !important;
+  font-weight: 700 !important;
+}
+
+/* 모바일 768px 이하 대응 (1열 그리드로 부드럽게 흐름) */
+@media (max-width: 768px) {
+  .workGrid {
+    grid-template-columns: 1fr; /* 1열 구성 */
+    gap: 24px;
+  }
+  
+  .workTitle {
+    font-size: 0.92rem;
+    margin-top: 10px;
+  }
+  
+  .workSubtitle {
+    font-size: 0.78rem;
+  }
+}

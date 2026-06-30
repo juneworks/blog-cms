@@ -1,142 +1,283 @@
-.page {
-  --background: #fafafa;
-  --foreground: #fff;
-
-  --text-primary: #000;
-  --text-secondary: #666;
-
-  --button-primary-hover: #383838;
-  --button-secondary-hover: #f2f2f2;
-  --button-secondary-border: #ebebeb;
-
+.container {
   display: flex;
-  flex: 1;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-geist-sans);
-  background-color: var(--background);
-}
-
-.main {
-  display: flex;
-  flex: 1;
-  width: 100%;
-  max-width: 800px;
-  flex-direction: column;
-  align-items: flex-start;
+  min-height: 100vh;
+  position: relative;
   justify-content: space-between;
-  background-color: var(--foreground);
-  padding: 120px 60px;
+  padding-top: 60px; /* 고정 헤더 높이(60px)만큼 강제 여백 확보 */
+  padding-bottom: 40px; /* 고정 푸터 높이(40px)만큼 강제 여백 확보 */
+  box-sizing: border-box;
 }
 
-.intro {
+/* 헤더 영역 */
+.header {
+  display: flex;
+  justify-content: flex-start; /* 왼쪽 정렬 */
+  align-items: center;
+  width: 100%;
+  height: 60px; /* 높이 80px에서 3/4 크기인 60px로 축소 */
+  flex-shrink: 0; /* 크기가 어떠한 기기/환경에서도 찌그러지지 않도록 고정 */
+  padding: 0 4rem; /* 좌우 패딩 복원 */
+  border-bottom: 1px solid var(--border-color); /* 가로 100% 구분선 */
+  box-sizing: border-box;
+  position: fixed; /* 완전히 고정시키기 위해 sticky에서 fixed로 변경 */
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: var(--background); /* 스크롤 시 뒤 콘텐츠가 겹치지 않게 배경색 지정 */
+}
+
+
+.authorName {
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 5px; /* 김과 준 사이의 간격 5px 추가 */
+  margin-right: -5px; /* 자간 설정으로 생기는 우측 공백 상쇄 */
+  color: var(--foreground);
+}
+
+.headerNav {
+  display: flex;
+  gap: 54px; /* 기존 24px(1.5rem)에서 30px 더 늘려 간격 조정 */
+  margin-left: auto; /* 김준 타이틀 반대편 우측 끝으로 밀어내기 */
+}
+
+.headerNavLink {
+  font-size: 0.9rem;
+  color: rgba(0, 0, 0, 0.9); /* 이전(0.6) 대비 50% 더 진하고 선명한 검은색 기반 톤 지정 */
+  font-weight: 500;
+  position: relative;
+  display: inline-block;
+  padding: 0.1rem 0.2rem; /* 가로선 폭에 맞추어 조밀하게 변경 */
+  transition: color 0.2s ease;
+}
+
+/* 글자 가운데를 관통하는 절반 두께(2.5px)의 초록색 가로선 */
+.headerNavLink::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 0%;
+  height: 2.5px; /* 글 제목 취소선(5px)의 절반 두께 */
+  background-color: var(--point-green);
+  transform: translateY(-50%);
+  transition: width 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  pointer-events: none;
+}
+
+.headerNavLink:hover {
+  color: var(--point-green); /* 호버 시 글자 색상도 숲색으로 변경 */
+}
+
+.headerNavLink:hover::after {
+  width: 100%;
+}
+
+
+
+/* 메인 콘텐츠 영역 (중앙 글 목록) */
+.main {
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
-  gap: 24px;
-}
-
-.intro h1 {
-  max-width: 320px;
-  font-size: 40px;
-  font-weight: 600;
-  line-height: 48px;
-  letter-spacing: -2.4px;
-  text-wrap: balance;
-  color: var(--text-primary);
-}
-
-.intro p {
-  max-width: 440px;
-  font-size: 18px;
-  line-height: 32px;
-  text-wrap: balance;
-  color: var(--text-secondary);
-}
-
-.intro a {
-  font-weight: 500;
-  color: var(--text-primary);
-}
-
-.ctas {
-  display: flex;
-  flex-direction: row;
+  justify-content: flex-start; /* 세로 중앙 정렬을 해제하고 상단부터 정렬되도록 하여 강제 여백 제거 */
+  align-items: center;
+  max-width: 680px; /* 실제 영역 가로 680px로 통일 지정 */
   width: 100%;
-  max-width: 440px;
-  gap: 16px;
-  font-size: 14px;
+  margin: 0 auto; /* 상하 마진은 0으로 하고 패딩으로 100px 제어 */
+  padding: 100px 0; /* 헤더/푸터 구분선과의 상하단 간격을 정확히 100px로 세팅 */
+  box-sizing: border-box;
 }
 
-.ctas a {
+
+.postList {
+  width: 100%;
+  list-style: none;
+}
+
+.postItem {
+  border-top: 1px solid var(--border-color);
+  width: 100%;
+}
+
+/* 첫 번째 제목 위의 선 삭제 */
+.postItem:first-child {
+  border-top: none;
+}
+
+/* 마지막 항목에만 아래 테두리 추가 */
+.postItem:last-child {
+  border-bottom: 1px solid var(--border-color);
+}
+
+.postItem:first-child .postLink {
+  padding-top: 0; /* 첫 번째 글은 헤더 패딩 100px 영역 바로 밑에 맞닿게 하여 정확히 100px 간격 성립 */
+}
+
+.postLink {
   display: flex;
+  justify-content: space-between; /* 글 제목은 좌측, 발행일은 우측 양끝 배치 */
+  align-items: center;
+  padding: 1.8rem 0.5rem 0.375rem 0.5rem; /* 위아래 비대칭 여백: 위 패딩 1.8rem (현재 1.5rem의 1.2배), 아래 패딩 0.375rem (유지) */
+  color: var(--foreground);
+  transition: all 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.postTitleText {
+  position: relative;
+  display: inline-block;
+  font-size: 14pt; /* 글 제목 폰트 크기 14pt 지정 */
+}
+
+.postDateText {
+  font-size: 9pt; /* 발행일 폰트 크기 9pt 지정 */
+  color: rgba(44, 44, 45, 0.45); /* 은은한 차콜 연회색 색상 */
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* 페이지네이션 스타일 */
+.pagination {
+  display: flex;
+  gap: 1rem;
   justify-content: center;
   align-items: center;
-  height: 40px;
-  padding: 0 16px;
-  border-radius: 128px;
-  border: 1px solid transparent;
-  transition: 0.2s;
+  margin-top: 3.5rem;
+  width: 100%;
+}
+
+.pageNumber {
+  font-size: 0.9rem;
+  color: rgba(0, 0, 0, 0.8); /* 이전(0.5) 대비 50% 이상 더 진한 검은색 기반 톤 지정 */
   cursor: pointer;
-  width: fit-content;
-  font-weight: 500;
+  position: relative;
+  display: inline-block;
+  padding: 0.1rem 0.2rem; /* 가로선에 꼭 맞는 폭 조정 */
+  transition: color 0.2s ease;
+  font-family: var(--font-serif);
+  background: transparent;
+  border: none;
 }
 
-a.primary {
-  background: var(--text-primary);
-  color: var(--background);
-  gap: 8px;
+/* 글자 한가운데를 관통하는 절반 두께(2.5px)의 가로선 */
+.pageNumber::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 0%;
+  height: 2.5px;
+  background-color: var(--point-green);
+  transform: translateY(-50%);
+  transition: width 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  pointer-events: none;
 }
 
-a.secondary {
-  border-color: var(--button-secondary-border);
+.pageNumber:hover {
+  color: var(--point-green);
 }
 
-/* Enable hover only on non-touch devices */
-@media (hover: hover) and (pointer: fine) {
-  a.primary:hover {
-    background: var(--button-primary-hover);
-    border-color: transparent;
+.pageNumber:hover::after {
+  width: 100%; /* 호버 시에만 가로 취소선이 채워짐 */
+}
+
+.activePage {
+  color: var(--foreground); /* 선택된 활성 페이지는 차분하게 검은색/볼드 텍스트로만 강조 */
+  font-weight: 700;
+}
+
+
+.postTitleText::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 0%;
+  height: 5px; /* 캡처본 기준 도톰한 굵기 */
+  background-color: var(--point-green);
+  transform: translateY(-50%);
+  transition: width 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  pointer-events: none;
+}
+
+/* 마우스를 가져대면 텍스트 가운데를 관통하는 두꺼운 초록색 가로선이 그려짐 */
+.postLink:hover .postTitleText::after {
+  width: 100%;
+}
+
+
+/* 푸터 영역 */
+.footer {
+  display: flex;
+  justify-content: center; /* 한가운데 정렬 */
+  align-items: center;
+  width: 100%;
+  height: 40px; /* 세로 높이 40px 지정 */
+  flex-shrink: 0; /* 크기가 기기/환경에 따라 줄어들지 않도록 고정 */
+  margin-top: auto;
+  padding: 0 4rem; /* 상하 패딩 0, 좌우 패딩 복원 */
+  border-top: 1px solid var(--border-color); /* 상단 구분선 추가 */
+  box-sizing: border-box;
+  position: fixed; /* 완전히 고정시키기 위해 sticky에서 fixed로 변경 */
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: var(--background); /* 스크롤 시 뒤 콘텐츠가 겹치지 않게 배경색 지정 */
+}
+
+.copyright {
+  font-size: 0.8rem;
+  color: rgba(0, 0, 0, 0.75); /* 이전(0.45) 대비 50% 이상 더 진한 검은색 기반 톤 지정 */
+  letter-spacing: -0.01em;
+  font-weight: 400;
+}
+
+
+.triangle {
+  font-size: 0.75rem;
+  display: inline-block;
+  transform: translateY(-1px);
+}
+
+/* 반응형 모바일 스타일 */
+@media (max-width: 768px) {
+  .container {
+    padding: 0;
   }
 
-  a.secondary:hover {
-    background: var(--button-secondary-hover);
-    border-color: transparent;
+  .header {
+    padding: 0 1.5rem;
   }
-}
 
-@media (max-width: 600px) {
   .main {
-    padding: 48px 24px;
+    margin: 3rem auto;
+    padding: 0 1.5rem;
   }
 
-  .intro {
-    gap: 16px;
+  .postLink {
+    padding: 1.25rem 0.1rem;
+    font-size: 1rem;
   }
 
-  .intro h1 {
-    font-size: 32px;
-    line-height: 40px;
-    letter-spacing: -1.92px;
+  .footer {
+    display: flex;
+    justify-content: center; /* 모바일에서도 한가운데 정렬 */
+    align-items: center;
+    width: 100%;
+    height: 40px; /* 높이 40px 유지 */
+    padding: 0 1.5rem; /* 모바일 좌우 패딩 */
   }
-}
-
-@media (prefers-color-scheme: dark) {
-  .logo {
-    filter: invert();
-  }
-
-  .page {
-    --background: #000;
-    --foreground: #000;
-
-    --text-primary: #ededed;
-    --text-secondary: #999;
-
-    --button-primary-hover: #ccc;
-    --button-secondary-hover: #1a1a1a;
-    --button-secondary-border: #1a1a1a;
+  
+  /* 모바일에서 한 줄로 나오되 필요 시 여백 조절 */
+  .footerMobileRow {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
   }
 }
