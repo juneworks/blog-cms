@@ -9,6 +9,9 @@ import styles from "./admin.module.css";
 export default function AdminDashboard() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
+  const [showConfig, setShowConfig] = useState(false);
+  const [newEmail, setNewEmail] = useState("");
+  const [newPassword, setNewPassword] = useState("");
   const router = useRouter();
 
   // 로그인 보호 체계
@@ -17,6 +20,9 @@ export default function AdminDashboard() {
       router.push("/admin/login");
       return;
     }
+
+    // 관리자 이메일 주소 세팅
+    setNewEmail(authService.getAdminEmail());
 
     const loadPosts = async () => {
       try {
@@ -37,6 +43,22 @@ export default function AdminDashboard() {
   const handleLogout = async () => {
     await authService.logout();
     router.push("/admin/login");
+  };
+
+  const handleUpdateAccount = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newEmail.includes("@")) {
+      alert("유효한 이메일 주소를 입력하세요.");
+      return;
+    }
+    if (newPassword.length < 6) {
+      alert("비밀번호는 최소 6자 이상으로 설정해 주세요.");
+      return;
+    }
+    authService.updateAccount(newEmail, newPassword);
+    alert("관리자 계정 정보가 정상적으로 변경되었습니다.");
+    setShowConfig(false);
+    setNewPassword("");
   };
 
   const handleDelete = async (id: string, title: string) => {
@@ -149,6 +171,57 @@ export default function AdminDashboard() {
             </tbody>
           </table>
         )}
+
+        {/* 관리자 계정 정보 재설정 섹션 */}
+        <div style={{ marginTop: "40px", borderTop: "1px solid var(--border-color)", paddingTop: "30px", textAlign: "left" }}>
+          {!showConfig ? (
+            <button
+              onClick={() => setShowConfig(true)}
+              className={styles.btn}
+              style={{ fontSize: "0.85rem", opacity: 0.8 }}
+            >
+              ⚙️ 관리자 계정 정보 변경 (이메일 & 비밀번호)
+            </button>
+          ) : (
+            <form onSubmit={handleUpdateAccount} style={{ maxWidth: "400px", background: "#f9f9fb", padding: "20px", borderRadius: "6px", border: "1px solid #e1e1e6" }}>
+              <h3 style={{ fontSize: "0.95rem", margin: "0 0 15px 0", fontWeight: "700" }}>⚙️ 계정 정보 변경</h3>
+              
+              <div style={{ marginBottom: "12px" }}>
+                <label style={{ display: "block", fontSize: "0.8rem", color: "gray", marginBottom: "4px" }}>새 이메일 주소</label>
+                <input
+                  type="email"
+                  className={styles.inputField}
+                  style={{ width: "100%", padding: "6px 10px", fontSize: "0.85rem", boxSizing: "border-box" }}
+                  value={newEmail}
+                  onChange={(e) => setNewEmail(e.target.value)}
+                  required
+                />
+              </div>
+
+              <div style={{ marginBottom: "15px" }}>
+                <label style={{ display: "block", fontSize: "0.8rem", color: "gray", marginBottom: "4px" }}>새 비밀번호</label>
+                <input
+                  type="password"
+                  className={styles.inputField}
+                  style={{ width: "100%", padding: "6px 10px", fontSize: "0.85rem", boxSizing: "border-box" }}
+                  value={newPassword}
+                  placeholder="6자 이상의 비밀번호"
+                  onChange={(e) => setNewPassword(e.target.value)}
+                  required
+                />
+              </div>
+
+              <div style={{ display: "flex", gap: "10px" }}>
+                <button type="submit" className={styles.btn} style={{ backgroundColor: "var(--point-green)", borderColor: "var(--point-green)", color: "white", padding: "0.4rem 1rem", fontSize: "0.8rem" }}>
+                  저장하기
+                </button>
+                <button type="button" onClick={() => { setShowConfig(false); setNewPassword(""); }} className={styles.btn} style={{ padding: "0.4rem 1rem", fontSize: "0.8rem" }}>
+                  취소
+                </button>
+              </div>
+            </form>
+          )}
+        </div>
       </main>
     </div>
   );

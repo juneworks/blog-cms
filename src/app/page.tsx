@@ -46,7 +46,7 @@ export default function Home() {
     <div className={styles.container}>
       {/* 헤더 영역 */}
       <header className={styles.header}>
-        <Link href="/admin" className={styles.authorName} title="관리자 모드">
+        <Link href="/" className={styles.authorName} title="홈">
           김준
         </Link>
         <nav className={styles.headerNav}>
@@ -101,7 +101,9 @@ export default function Home() {
 
       {/* 푸터 영역 */}
       <footer className={styles.footer}>
-        <span className={styles.copyright}>Copyright 2025-2026. June Kim 🇰🇷 All rights reserved.</span>
+        <span className={styles.copyright}>
+          Copyright 2025-2026. <Link href="/admin" style={{ color: "inherit", textDecoration: "none", cursor: "default" }}>June Kim</Link> 🇰🇷 All rights reserved.
+        </span>
       </footer>
     </div>
   );

@@ -260,7 +260,9 @@ export default function PostDetail() {
 
       {/* 푸터 영역 */}
       <footer className={styles.footer}>
-        <span className={styles.copyright}>Copyright 2025-2026. June Kim 🇰🇷 All rights reserved.</span>
+        <span className={styles.copyright}>
+          Copyright 2025-2026. <Link href="/admin" style={{ color: "inherit", textDecoration: "none", cursor: "default" }}>June Kim</Link> 🇰🇷 All rights reserved.
+        </span>
       </footer>
     </div>
   );

@@ -28,15 +28,43 @@ if (isFirebaseEnabled) {
   }
 }
 
-const DEMO_PASSWORD = "admin1234"; // 로컬스토리지 fallback용 비밀번호
 const AUTH_COOKIE_NAME = "blog_admin_authenticated";
+const STORAGE_EMAIL_KEY = "blog_admin_email";
+const STORAGE_PASSWORD_KEY = "blog_admin_password";
 
 export const authService = {
+  // 계정이 초기 세팅되어 있는지 여부
+  isAccountConfigured(): boolean {
+    if (typeof window === "undefined") return false;
+    return !!localStorage.getItem(STORAGE_PASSWORD_KEY);
+  },
+
+  // 관리자 이메일 조회
+  getAdminEmail(): string {
+    if (typeof window === "undefined") return "";
+    return localStorage.getItem(STORAGE_EMAIL_KEY) || "";
+  },
+
+  // 계정 초기 세팅
+  setupAccount(email: string, password: string): void {
+    if (typeof window !== "undefined") {
+      localStorage.setItem(STORAGE_EMAIL_KEY, email);
+      localStorage.setItem(STORAGE_PASSWORD_KEY, password);
+    }
+  },
+
+  // 계정 정보 업데이트 (비밀번호 변경 등)
+  updateAccount(email: string, password: string): void {
+    if (typeof window !== "undefined") {
+      localStorage.setItem(STORAGE_EMAIL_KEY, email);
+      localStorage.setItem(STORAGE_PASSWORD_KEY, password);
+    }
+  },
+
   // 로그인 시도
   async login(password: string, email?: string): Promise<boolean> {
     if (isFirebaseEnabled && auth) {
       try {
-        // Firebase Auth를 사용할 경우 이메일이 필요하므로, 이메일이 주어지지 않은 경우 default admin 이메일로 매칭
         const adminEmail = email || process.env.NEXT_PUBLIC_ADMIN_EMAIL || "admin@example.com";
         await signInWithEmailAndPassword(auth, adminEmail, password);
         if (typeof window !== "undefined") {
@@ -48,11 +76,17 @@ export const authService = {
         return false;
       }
     } else {
-      // 로컬 fallback
-      if (password === DEMO_PASSWORD) {
-        if (typeof window !== "undefined") {
-          localStorage.setItem(AUTH_COOKIE_NAME, "true");
-        }
+      // 로컬 fallback (로컬스토리지 저장 비밀번호 및 이메일 검증)
+      if (typeof window === "undefined") return false;
+      
+      const storedEmail = localStorage.getItem(STORAGE_EMAIL_KEY);
+      const storedPassword = localStorage.getItem(STORAGE_PASSWORD_KEY);
+      
+      // 입력받은 이메일이 매칭되는지도 체크 (이메일 주소 연결 검증)
+      const isEmailValid = !email || storedEmail === email;
+      
+      if (isEmailValid && storedPassword === password) {
+        localStorage.setItem(AUTH_COOKIE_NAME, "true");
         return true;
       }
       return false;

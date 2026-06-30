@@ -99,7 +99,7 @@ export default function AboutPage() {
     <div className={pageStyles.container}>
       {/* 헤더 영역 (고정) */}
       <header className={pageStyles.header}>
-        <Link href="/admin" className={pageStyles.authorName} title="관리자 모드">
+        <Link href="/" className={pageStyles.authorName} title="홈">
           김준
         </Link>
         <nav className={pageStyles.headerNav}>
@@ -122,7 +122,9 @@ export default function AboutPage() {
 
       {/* 푸터 영역 (고정) */}
       <footer className={pageStyles.footer}>
-        <span className={pageStyles.copyright}>Copyright 2025-2026. June Kim 🇰🇷 All rights reserved.</span>
+        <span className={pageStyles.copyright}>
+          Copyright 2025-2026. <Link href="/admin" style={{ color: "inherit", textDecoration: "none", cursor: "default" }}>June Kim</Link> 🇰🇷 All rights reserved.
+        </span>
       </footer>
     </div>
   );
