@@ -147,6 +147,7 @@
   justify-content: center;
   align-items: center;
   margin-top: 3.5rem;
+  margin-bottom: 0 !important; /* 하단 추가 여백을 완전히 리셋하여 푸터 구분선까지의 100px 간격을 확립 */
   width: 100%;
 }
 
