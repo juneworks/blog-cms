@@ -59,8 +59,8 @@ export default function AboutPage() {
         );
       }
 
-      // 2. 소그룹 리스트 파싱 (― motto, ― 모바일용 디자인 등)
-      if (block.startsWith("― ")) {
+      // 2. 소그룹 리스트 파싱 (― 또는 ㅡ 시작)
+      if (block.startsWith("― ") || block.startsWith("ㅡ ")) {
         const lines = block.split("\n");
         const groupTitle = lines[0];
         const items = lines.slice(1);
@@ -68,9 +68,13 @@ export default function AboutPage() {
           <div key={index} className={aboutStyles.listGroup}>
             <h4 className={aboutStyles.listGroupTitle}>{groupTitle}</h4>
             <ul className={aboutStyles.listItems}>
-              {items.map((item, i) => (
-                <li key={i} className={aboutStyles.listItem}>{item}</li>
-              ))}
+              {items.map((item, i) => {
+                // 시작점에 'ㆍ' 기호가 있으면 중복 방지를 위해 제거
+                const cleanItem = item.startsWith("ㆍ") ? item.substring(1).trim() : item;
+                return (
+                  <li key={i} className={aboutStyles.listItem}>{cleanItem}</li>
+                );
+              })}
             </ul>
           </div>
         );
