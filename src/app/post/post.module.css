@@ -4,8 +4,8 @@
   min-height: 100vh;
   position: relative;
   justify-content: space-between;
-  padding-top: 60px; /* 고정 헤더 높이(60px)만큼 강제 여백 확보 */
-  padding-bottom: 40px; /* 고정 푸터 높이(40px)만큼 강제 여백 확보 */
+  padding-top: 80px; /* 고정 헤더 높이(80px)만큼 강제 여백 확보 */
+  padding-bottom: 80px; /* 고정 푸터 높이(80px)만큼 강제 여백 확보 */
   box-sizing: border-box;
 }
 
@@ -14,7 +14,7 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: 60px; /* 높이 80px에서 3/4 크기인 60px로 축소 */
+  height: 80px; /* 높이 80px 지정 */
   flex-shrink: 0; /* 어떠한 화면에서도 높이 고정 */
   padding: 0 4rem; /* 좌우 패딩 설정 */
   border-bottom: 1px solid var(--border-color); /* 가로 100% 구분선 */
@@ -319,7 +319,7 @@
   justify-content: center; /* 한가운데 정렬 */
   align-items: center;
   width: 100%;
-  height: 40px; /* 높이 40px 지정 */
+  height: 80px; /* 높이 80px 지정 */
   flex-shrink: 0; /* 어떠한 화면에서도 높이 고정 */
   margin-top: auto;
   padding: 0 4rem; /* 상하 패딩 0, 좌우 패딩 복원 */
@@ -360,7 +360,7 @@
     justify-content: center; /* 모바일에서도 한가운데 정렬 */
     align-items: center;
     width: 100%;
-    height: 40px; /* 높이 40px 유지 */
+    height: 80px; /* 높이 80px 지정 */
     padding: 0 1.5rem; /* 모바일 좌우 패딩 */
   }
 }
