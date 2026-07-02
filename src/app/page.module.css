@@ -5,7 +5,7 @@
   position: relative;
   justify-content: space-between;
   padding-top: 80px; /* 고정 헤더 높이(80px)만큼 강제 여백 확보 */
-  padding-bottom: 80px; /* 고정 푸터 높이(80px)만큼 강제 여백 확보 */
+  padding-bottom: 0; /* 푸터 고정 해제로 인한 여백 리셋 */
   box-sizing: border-box;
 }
 
@@ -222,13 +222,7 @@
   margin-top: auto;
   padding: 0 4rem; /* 상하 패딩 0, 좌우 패딩 복원 */
   border-top: 1px solid var(--border-color); /* 상단 구분선 추가 */
-  box-sizing: border-box;
-  position: fixed; /* 완전히 고정시키기 위해 sticky에서 fixed로 변경 */
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  background-color: var(--background); /* 스크롤 시 뒤 콘텐츠가 겹치지 않게 배경색 지정 */
+  background-color: var(--background); /* 뒷 콘텐츠가 겹치지 않게 배경색 지정 */
 }
 
 .copyright {
