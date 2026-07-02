@@ -83,7 +83,7 @@
   width: 100%;
   margin: 0 auto; /* 상단 마진은 스티키 헤더가 있으므로 0으로 하고 패딩 탑으로 보정 */
   padding-top: 40px; /* 고정 제목 영역과의 간격 확보 */
-  padding-bottom: 20px; /* 하단 네비게이션 간격 20px 확보 */
+  padding-bottom: 100px; /* 하단 푸터 구분선까지의 100px 간격 완벽 보장 */
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
@@ -226,7 +226,7 @@
 .navSectionContainer {
   max-width: 680px;
   width: 100%;
-  margin: 20px auto 100px auto; /* 본문 아래 20px 띄우고, 푸터 구분선과의 간격을 위해 하단 마진 100px 부여 */
+  margin: 20px auto 0 auto; /* 본문 아래 20px 정도 간격 띄움 */
   box-sizing: border-box;
 }
 
@@ -352,7 +352,7 @@
   }
 
   .main {
-    padding: 20px 1.5rem 20px 1.5rem;
+    padding: 40px 1.5rem 100px 1.5rem; /* 모바일에서도 상단 여백 및 하단 푸터 구분선 100px 완벽 확보 */
   }
 
   .footer {

@@ -256,8 +256,8 @@
   }
 
   .main {
-    margin: 3rem auto;
-    padding: 0 1.5rem;
+    margin: 0 auto;
+    padding: 100px 1.5rem; /* 모바일에서도 헤더/푸터 구분선 대비 100px 완벽 대칭 여백 유지 */
   }
 
   .postLink {

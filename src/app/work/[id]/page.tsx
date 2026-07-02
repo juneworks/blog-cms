@@ -240,40 +240,40 @@ export default function WorkDetail() {
           </div>
           <div className={styles.postContent}>{work.content}</div>
         </article>
-      </main>
 
-      {/* 푸터 영역 위의 네비게이션 및 인터랙션 컴포넌트 */}
-      <div className={styles.navSectionContainer}>
-        <div className={styles.bottomDivider} />
-        <div className={styles.postNavigation}>
-          <div className={styles.navLeft}>
-            {prevWork ? (
-              <Link href={`/work/${prevWork.id}`} className={styles.navLink}>
-                ← 이전 작업
-              </Link>
-            ) : (
-              <span className={styles.navDisabled}>← 이전 작업</span>
-            )}
-          </div>
-          <div className={styles.navCenter}>
-            <button onClick={handleLike} className={`${styles.interactionBtn} ${liked ? styles.liked : ""}`} title="좋아요">
-              ♥ {likes}
-            </button>
-            <button onClick={handleShare} className={styles.interactionBtn} title="공유하기">
-              ✈ {shares}
-            </button>
-          </div>
-          <div className={styles.navRight}>
-            {nextWork ? (
-              <Link href={`/work/${nextWork.id}`} className={styles.navLink}>
-                다음 작업 →
-              </Link>
-            ) : (
-              <span className={styles.navDisabled}>다음 작업 →</span>
-            )}
+        {/* 푸터 영역 위의 네비게이션 및 인터랙션 컴포넌트 */}
+        <div className={styles.navSectionContainer}>
+          <div className={styles.bottomDivider} />
+          <div className={styles.postNavigation}>
+            <div className={styles.navLeft}>
+              {prevWork ? (
+                <Link href={`/work/${prevWork.id}`} className={styles.navLink}>
+                  ← 이전 작업
+                </Link>
+              ) : (
+                <span className={styles.navDisabled}>← 이전 작업</span>
+              )}
+            </div>
+            <div className={styles.navCenter}>
+              <button onClick={handleLike} className={`${styles.interactionBtn} ${liked ? styles.liked : ""}`} title="좋아요">
+                ♥ {likes}
+              </button>
+              <button onClick={handleShare} className={styles.interactionBtn} title="공유하기">
+                ✈ {shares}
+              </button>
+            </div>
+            <div className={styles.navRight}>
+              {nextWork ? (
+                <Link href={`/work/${nextWork.id}`} className={styles.navLink}>
+                  다음 작업 →
+                </Link>
+              ) : (
+                <span className={styles.navDisabled}>다음 작업 →</span>
+              )}
+            </div>
           </div>
         </div>
-      </div>
+      </main>
 
       {/* 푸터 영역 */}
       <footer className={styles.footer}>
