@@ -57,8 +57,8 @@
 }
 
 /* 마지막 문단은 아래 마진을 제거하여 정확히 100px의 푸터 간격을 띰 */
-.paragraph:last-child {
-  margin-bottom: 0;
+.aboutArticle > *:last-child {
+  margin-bottom: 0 !important;
 }
 
 /* 소그룹 리스트 컨테이너 (― motto 등) */
