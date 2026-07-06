@@ -43,14 +43,15 @@ export default function EditPost() {
     loadPost();
   }, [id, router]);
 
-  const handleUpdate = async (title: string, subtitle: string, content: string) => {
+  const handleUpdate = async (title: string, subtitle: string, content: string, type: 'post' | 'work') => {
     if (!id) return;
     setSaving(true);
     try {
       await dbService.updatePost(id, {
         title,
         subtitle,
-        content
+        content,
+        type
       });
       alert("글이 성공적으로 수정되었습니다.");
       router.push("/admin");
@@ -82,9 +83,11 @@ export default function EditPost() {
       initialTitle={post.title}
       initialSubtitle={post.subtitle}
       initialContent={post.content}
+      initialType={post.type}
+      isAbout={id === "about"}
       onSave={handleUpdate}
       saving={saving}
-      pageTitle="글 수정"
+      pageTitle={id === "about" ? "소개 페이지 수정" : "글 수정"}
     />
   );
 }

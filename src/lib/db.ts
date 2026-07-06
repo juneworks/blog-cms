@@ -113,17 +113,11 @@ const getLocalPosts = (): Post[] => {
   }
   try {
     const parsed = JSON.parse(stored) as Post[];
-    const targetPost = parsed.find(p => p.id === "p4");
-    const hasWorkPosts = parsed.some(p => p.type === "work");
-    const hasAboutPost = parsed.some(p => p.id === "about");
-    const isNewAboutContent = hasAboutPost && parsed.find(p => p.id === "about")?.content.includes("고교 및 대학에서 이공계에");
-    // 기존 글 개수보다 적거나, 작업 포스트 또는 소개 포스트(about)가 누락되어 있거나, 샘플 글 본문이 구버전일 시 자동 갱신
-    const needsMigration = parsed.length < INITIAL_POSTS.length || !targetPost || !targetPost.content.startsWith("엄마,") || !hasWorkPosts || !hasAboutPost || !isNewAboutContent;
-    if (needsMigration) {
-      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(INITIAL_POSTS));
-      return INITIAL_POSTS;
+    if (Array.isArray(parsed)) {
+      return parsed;
     }
-    return parsed;
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(INITIAL_POSTS));
+    return INITIAL_POSTS;
   } catch (e) {
     return INITIAL_POSTS;
   }

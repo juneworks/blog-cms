@@ -21,13 +21,14 @@ export default function WritePost() {
     }
   }, [router]);
 
-  const handleSave = async (title: string, subtitle: string, content: string) => {
+  const handleSave = async (title: string, subtitle: string, content: string, type: 'post' | 'work') => {
     setSaving(true);
     try {
       await dbService.createPost({
         title,
         subtitle,
-        content
+        content,
+        type
       });
       alert("성공적으로 글이 저장되었습니다.");
       router.push("/admin");

@@ -84,7 +84,9 @@ interface PostEditorProps {
   initialTitle?: string;
   initialSubtitle?: string;
   initialContent?: string;
-  onSave: (title: string, subtitle: string, content: string) => Promise<void>;
+  initialType?: 'post' | 'work';
+  isAbout?: boolean;
+  onSave: (title: string, subtitle: string, content: string, type: 'post' | 'work') => Promise<void>;
   saving: boolean;
   pageTitle?: string;
 }
@@ -93,6 +95,8 @@ export default function PostEditor({
   initialTitle = "",
   initialSubtitle = "",
   initialContent = "",
+  initialType = "post",
+  isAbout = false,
   onSave,
   saving,
   pageTitle = "글 작성"
@@ -100,22 +104,24 @@ export default function PostEditor({
   const [title, setTitle] = useState(initialTitle);
   const [subtitle, setSubtitle] = useState(initialSubtitle);
   const [content, setContent] = useState(initialContent);
+  const [type, setType] = useState<'post' | 'work'>(initialType);
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
   const router = useRouter();
 
-  // props 변경 시 상태 반영 (특히 비동기 로딩되는 edit 페이지를 위해)
+  // props 변경 시 상태 반영
   useEffect(() => {
     setTitle(initialTitle);
     setSubtitle(initialSubtitle);
     setContent(initialContent);
-  }, [initialTitle, initialSubtitle, initialContent]);
+    setType(initialType);
+  }, [initialTitle, initialSubtitle, initialContent, initialType]);
 
   const handleSaveClick = () => {
     if (!title.trim()) {
       alert("제목을 입력해주세요.");
       return;
     }
-    onSave(title, subtitle, content);
+    onSave(title, subtitle, content, type);
   };
 
   const checkSpelling = () => {
@@ -151,6 +157,41 @@ export default function PostEditor({
       {/* 메인 작성 공간 */}
       <div className={styles.editorWorkspace}>
         <div className={styles.writeArea}>
+          {!isAbout && (
+            <div style={{ display: "flex", gap: "10px", marginBottom: "20px", alignItems: "center" }}>
+              <span style={{ fontSize: "0.85rem", color: "gray", fontWeight: "700" }}>콘텐츠 구분 :</span>
+              <button
+                type="button"
+                onClick={() => setType("post")}
+                style={{
+                  padding: "6px 16px",
+                  borderRadius: "20px",
+                  fontSize: "0.85rem",
+                  fontWeight: "700",
+                  backgroundColor: type === "post" ? "var(--point-green)" : "#e1e1e6",
+                  color: type === "post" ? "#ffffff" : "#000000",
+                  transition: "all 0.2s ease"
+                }}
+              >
+                일반 에세이 글 (Post)
+              </button>
+              <button
+                type="button"
+                onClick={() => setType("work")}
+                style={{
+                  padding: "6px 16px",
+                  borderRadius: "20px",
+                  fontSize: "0.85rem",
+                  fontWeight: "700",
+                  backgroundColor: type === "work" ? "var(--point-green)" : "#e1e1e6",
+                  color: type === "work" ? "#ffffff" : "#000000",
+                  transition: "all 0.2s ease"
+                }}
+              >
+                포트폴리오 작업물 (Work)
+              </button>
+            </div>
+          )}
           <input
             type="text"
             className={styles.titleInput}
