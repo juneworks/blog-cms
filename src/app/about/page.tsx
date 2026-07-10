@@ -52,7 +52,7 @@ export default function AboutPage() {
           <div key={index} className={aboutStyles.sectionHeader}>
             <h2 className={aboutStyles.sectionTitle}>
               <span className={aboutStyles.titleAccent}>{mainWord}</span>
-              {restWord && <span className={aboutStyles.titleRest}> {restWord}</span>}
+              {restWord && <span className={aboutStyles.titleRest}>{restWord}</span>}
             </h2>
             {descLine && <p className={aboutStyles.sectionDesc}>{descLine}</p>}
           </div>

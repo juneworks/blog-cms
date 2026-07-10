@@ -19,21 +19,22 @@
 /* 메인 대제목 */
 .sectionTitle {
   font-size: 1.5rem;
-  font-weight: 800;
+  font-weight: 700;
   color: #000000;
   margin: 0;
   letter-spacing: -0.01em;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family: var(--font-gowun-batang);
 }
 
 /* 첫 네 단어 악센트 (JUNE, WORKS 등) */
 .titleAccent {
   color: #000000;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .titleRest {
   color: #a24a41; /* WORKS 옆의 오렌지 레드 톤 동기화 */
+  font-weight: 700;
 }
 
 /* 제목 옆/아래 설명구 (이미지 속 붉은 서브 타이틀 톤) */

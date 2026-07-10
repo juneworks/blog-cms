@@ -4,6 +4,7 @@
   --point-green: #2e633f; /* 기존 #3d5245 대비 약 30% 더 선명하고 짙은 녹색 톤 */
   --border-color: rgba(44, 44, 45, 0.18); /* 얇은 구분선 (기존 0.28에서 10% 연하게 조정) */
   --font-serif: var(--font-nanum-myeongjo), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, serif;
+  --font-gowun-batang: var(--font-gowun-batang), serif;
 }
 
 * {
