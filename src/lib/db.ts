@@ -109,14 +109,31 @@ const getLocalPosts = (): Post[] => {
   const stored = localStorage.getItem(LOCAL_STORAGE_KEY);
   if (!stored) {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(INITIAL_POSTS));
+    localStorage.setItem("blog_cms_migration_version", "v2");
     return INITIAL_POSTS;
   }
   try {
-    const parsed = JSON.parse(stored) as Post[];
+    let parsed = JSON.parse(stored) as Post[];
     if (Array.isArray(parsed)) {
+      // v2 소개글 강제 1회성 동기화 마이그레이션
+      const currentVer = localStorage.getItem("blog_cms_migration_version");
+      if (currentVer !== "v2") {
+        const initialAbout = INITIAL_POSTS.find(p => p.id === "about");
+        if (initialAbout) {
+          const index = parsed.findIndex(p => p.id === "about");
+          if (index !== -1) {
+            parsed[index] = initialAbout;
+          } else {
+            parsed.push(initialAbout);
+          }
+          localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(parsed));
+        }
+        localStorage.setItem("blog_cms_migration_version", "v2");
+      }
       return parsed;
     }
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(INITIAL_POSTS));
+    localStorage.setItem("blog_cms_migration_version", "v2");
     return INITIAL_POSTS;
   } catch (e) {
     return INITIAL_POSTS;
