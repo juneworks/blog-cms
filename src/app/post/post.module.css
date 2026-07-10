@@ -160,7 +160,7 @@
 }
 
 .postDate {
-  font-size: 18px; /* 기존 9px 대비 2배로 확대 */
+  font-size: 12px; /* 기존 18px 대비 2/3 크기로 축소 조절 */
   color: rgba(0, 0, 0, 0.82); /* 이전(0.55) 대비 50% 이상 더 진한 검은색 기반 톤 지정 */
   text-align: right;
   font-family: var(--font-serif);
@@ -362,8 +362,11 @@
   .postTitle {
     font-size: 20pt; /* 모바일 시인성 맞춤 20pt 조절 */
   }
-  .postSubtitle, .postDate {
-    font-size: 13px; /* 모바일 부제/날짜 맞춤 13px 조절 */
+  .postSubtitle {
+    font-size: 13px; /* 모바일 부제 맞춤 13px 조절 */
+  }
+  .postDate {
+    font-size: 9px; /* 모바일 날짜 맞춤 2/3 스케일인 9px로 축소 조절 */
   }
   .postHeaderArea.scrolled {
     height: 80px;
