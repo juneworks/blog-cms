@@ -199,6 +199,8 @@ export default function WorkDetail() {
           <Link href="/work" className={`${styles.headerNavLink} ${workStyles.activeMenu}`}>작업</Link>
           <Link href="/about" className={styles.headerNavLink}>소개</Link>
         </nav>
+        {/* 읽기 진행률 표시선을 고정 헤더 하단 가로 100% 전체 영역에 배치 */}
+        <div className={styles.scrollIndicator} style={{ width: `${scrollProgress}%` }} />
       </header>
 
       {/* 동적 타이틀 영역 (글 페이지와 100% 동일 구조) */}
@@ -215,10 +217,9 @@ export default function WorkDetail() {
             )}
             <span className={styles.postDate}>{formatDate(work.createdAt)}</span>
           </div>
-          {/* 제목 영역 구분선 및 스크롤 진행선 인디케이터 */}
+          {/* 제목 영역 구분선 */}
           <div className={styles.headerDividerContainer}>
             <div className={styles.headerDivider} />
-            <div className={styles.scrollIndicator} style={{ width: `${scrollProgress}%` }} />
           </div>
         </div>
       </div>

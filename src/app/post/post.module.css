@@ -182,13 +182,13 @@
   background-color: var(--border-color); /* 제목 영역 구분선 */
 }
 
-/* 스크롤 진행 상황을 보여주는 인디케이터 굵은 선 */
+/* 고정 헤더의 하단 경계선에 밀착하는 가로 100% 읽기 진행률 표시선 */
 .scrollIndicator {
   position: absolute;
   left: 0;
-  top: -1px; /* 구분선 바로 위에 겹치도록 설정 */
-  height: 3px; /* 굵기: 호버 효과 선(5px)의 60% = 3px */
-  background-color: var(--point-green); /* 선 색상: 메인 타이틀 호버색 */
+  bottom: 0; /* 고정 헤더 바닥선에 딱 달라붙어 위치하도록 설정 */
+  height: 3px; /* 굵기: 3px */
+  background-color: var(--point-green); /* 선 색상: 포인트 초록색 */
   transition: width 0.1s ease;
   z-index: 10;
 }
