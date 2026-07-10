@@ -201,7 +201,7 @@
   right: 0;
   width: 100%;
   height: 80px; /* 높이가 메인 헤더와 동일한 80px로 축소 및 정합 */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02); /* 구분선 아래 소량의 모던 섀도우 얹음 */
+  /* box-shadow를 제거하여 본문 배경과 경계선 없이 완벽하고 자연스럽게 융합되도록 정합 */
 }
 
 .postHeaderArea.scrolled .postHeaderContainer {
@@ -211,6 +211,10 @@
 .postHeaderArea.scrolled .postTitle {
   font-size: 20pt; /* 기존 10pt 대비 2배로 확대 */
   font-weight: 400; /* 볼드처리 해제 */
+}
+
+.postHeaderArea.scrolled .headerDividerContainer {
+  display: none; /* 스크롤 고정 시 구분선 자체를 완전히 가려 본문과 여백이 끊김 없이 흐르게 보정 */
 }
 
 .postHeaderArea.scrolled .postMetaRow {
