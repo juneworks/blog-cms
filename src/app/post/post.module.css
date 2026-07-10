@@ -354,6 +354,23 @@
     padding: 40px 1.5rem 100px 1.5rem; /* 모바일에서도 상단 여백 및 하단 푸터 구분선 100px 완벽 확보 */
   }
 
+  /* 모바일 가로폭 대응 반응형 헤더 폰트 및 고정 타이틀 크기 조율 */
+  .postHeaderArea {
+    height: 150px; /* 모바일 기본 헤더 영역 높이는 150px로 콤팩트하게 보정 */
+  }
+  .postTitle {
+    font-size: 20pt; /* 모바일 시인성 맞춤 20pt 조절 */
+  }
+  .postSubtitle, .postDate {
+    font-size: 13px; /* 모바일 부제/날짜 맞춤 13px 조절 */
+  }
+  .postHeaderArea.scrolled {
+    height: 80px;
+  }
+  .postHeaderArea.scrolled .postTitle {
+    font-size: 14pt; /* 모바일 스크롤 고정 시 14pt 조절 */
+  }
+
   .footer {
     display: flex;
     justify-content: center; /* 모바일에서도 한가운데 정렬 */
